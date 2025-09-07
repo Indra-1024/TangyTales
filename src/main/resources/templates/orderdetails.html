@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #f3f3f3, #e6e6e6);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #444;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        h2 {
+            color: #444;
+            margin-bottom: 15px;
+        }
+        .order-info {
+            margin-bottom: 20px;
+        }
+        .order-info p {
+            margin: 5px 0;
+            font-size: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background: #444;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f7f7f7;
+        }
+        .back {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #444;
+            font-weight: bold;
+        }
+        .back:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<header>📦 Order Details</header>
+
+<div class="container">
+    <h2>Order #<span th:text="${order.id}"></span></h2>
+    <div class="order-info">
+        <p><b>Date:</b> <span th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></span></p>
+        <p><b>Status:</b> <span th:text="${order.status}"></span></p>
+        <p><b>Total Price:</b> ₹<span th:text="${order.totalPrice}"></span></p>
+    </div>
+
+    <h3>Items</h3>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price (Each)</th>
+            <th>Total</th>
+        </tr>
+        <tr th:each="item : ${order.items}">
+            <td th:text="${item.product.name}"></td>
+            <td th:text="${item.quantity}"></td>
+            <td th:text="${item.product.price}"></td>
+            <td th:text="${item.product.price * item.quantity}"></td>
+        </tr>
+    </table>
+
+    <a href="/orders" class="back">⬅ Back to Orders</a>
+</div>
+
+</body>
+</html>

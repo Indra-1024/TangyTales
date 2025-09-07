@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registered Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #ff6600;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #ff6600;
+            color: white;
+        }
+        tr:hover {
+            background: #f1f1f1;
+        }
+        .back {
+            display: block;
+            margin: 20px auto;
+            width: 180px;
+            text-align: center;
+            background: #ff6600;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .back:hover {
+            background: #e65500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Registered Users</h1>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.email}"></td> <!-- ✅ FIXED -->
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/home" class="back">⬅ Back to Home</a>
+</body>
+</html>

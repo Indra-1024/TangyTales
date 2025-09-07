@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - TangyTales</title>
+</head>
+<body style="font-family: Arial, sans-serif; background:#f9f9f9; display:flex; justify-content:center; align-items:center; height:100vh;">
+    <div style="background:#fff; padding:30px; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); width:400px;">
+        <h2 style="text-align:center; color:#ff6600;">Create Account</h2>
+        <form action="/register" method="post" style="display:flex; flex-direction:column; gap:12px;">
+            <input type="email" name="email" placeholder="Email" required 
+                   style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+            <input type="password" name="password" placeholder="Password" required 
+                   style="padding:10px; border:1px solid #ddd; border-radius:6px;">
+            <button type="submit" style="padding:10px; background:#ff6600; color:#fff; border:none; border-radius:6px; cursor:pointer;">Register</button>
+        </form>
+        <p style="text-align:center; margin-top:10px;">Already have an account? <a href="/login" style="color:#ff6600;">Login</a></p>
+    </div>
+</body>
+</html>

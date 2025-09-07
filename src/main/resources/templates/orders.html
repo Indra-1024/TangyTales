@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Orders</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #fff3e6, #ffe0cc);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #ff6600;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 14px;
+            text-align: center;
+        }
+        th {
+            background: #ff6600;
+            color: white;
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background: #fff3e6;
+        }
+        tr:hover {
+            background: #ffe0cc;
+        }
+        .details-link {
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .details-link:hover {
+            text-decoration: underline;
+        }
+        .actions {
+            text-align: center;
+            margin-top: 25px;
+        }
+        .btn {
+            background: #ff6600;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #e65500;
+            transform: scale(1.05);
+        }
+        .btn-green {
+            background: #28a745;
+        }
+        .btn-green:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+<header>🛒 Your Orders</header>
+
+<div class="container">
+    <h2>Order History</h2>
+
+    <!-- Orders Table -->
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Total Price</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm')}"></td>
+            <td th:text="${order.status}"></td>
+            <td th:text="${order.totalPrice}"></td>
+            <td>
+                <a th:href="@{'/orders/details/' + ${order.id}}" class="details-link">View Details</a>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Place Order Buttons -->
+    <div class="actions">
+        <!-- Place directly from Cart -->
+        <form th:action="@{/orders/place}" method="post" style="display:inline;">
+            <button type="submit" class="btn">+ Place From Cart</button>
+        </form>
+
+        <!-- Manual new order -->
+        <a th:href="@{/orders/new}" class="btn btn-green">+ Place New Order</a>
+    </div>
+</div>
+
+</body>
+</html>
