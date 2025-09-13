@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout - TangyTales</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #fff8f0, #ffe9d6);
+      margin: 0;
+      padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .checkout-container {
+      width: 85%;
+      max-width: 800px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      padding: 25px;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(20px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+    h2 {
+      text-align: center;
+      color: #d35400;
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    label {
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: block;
+      color: #2c3e50;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: 0.2s;
+    }
+    input:focus, textarea:focus {
+      border-color: #ff6600;
+      outline: none;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    .summary {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fafafa;
+      border-radius: 10px;
+      border: 1px solid #eee;
+    }
+    .summary h3 {
+      margin: 0 0 10px;
+      color: #2980b9;
+    }
+    .btn {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .btn-confirm {
+      background: #27ae60;
+      color: white;
+    }
+    .btn-confirm:hover {
+      background: #219150;
+      transform: scale(1.05);
+    }
+    .btn-cancel {
+      background: #e74c3c;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+    .btn-cancel:hover {
+      background: #c0392b;
+      transform: scale(1.05);
+    }
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+<div class="checkout-container">
+  <h2>🧾 Checkout</h2>
+  <form th:action="@{/checkout}" method="post">
+    <div>
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="customerName" required>
+    </div>
+    <div>
+      <label for="address">Delivery Address</label>
+      <textarea id="address" name="deliveryAddress" required></textarea>
+    </div>
+    <div>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required>
+    </div>
+    <div>
+      <label for="payment">Payment Method</label>
+      <select id="payment" name="paymentMethod" style="padding:10px; border-radius:8px; width:100%;">
+        <option value="COD">Cash on Delivery</option>
+        <option value="UPI">UPI</option>
+        <option value="CARD">Credit/Debit Card</option>
+      </select>
+    </div>
+    <div class="summary">
+      <h3>Order Summary</h3>
+      <p>Total Items: <span th:text="${cartItems.size()}"></span></p>
+      <p>Total Price: ₹ <span th:text="${totalPrice}"></span></p>
+    </div>
+    <div class="actions">
+      <button type="submit" class="btn btn-confirm">✅ Confirm Order</button>
+      <a href="/cart" class="btn btn-cancel">❌ Cancel</a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

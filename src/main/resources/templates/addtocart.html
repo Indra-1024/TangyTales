@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Item Added - TangyTales</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #fff8f0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .message-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      animation: popIn 0.5s ease-in-out;
+    }
+    @keyframes popIn {
+      from {opacity:0; transform:scale(0.9);}
+      to {opacity:1; transform:scale(1);}
+    }
+    h2 {
+      color: #27ae60;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    a {
+      display: inline-block;
+      padding: 12px 20px;
+      margin: 8px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn-cart {
+      background: #f39c12;
+      color: #fff;
+    }
+    .btn-cart:hover {
+      background: #d68910;
+    }
+    .btn-continue {
+      background: #2980b9;
+      color: #fff;
+    }
+    .btn-continue:hover {
+      background: #21618c;
+    }
+  </style>
+</head>
+<body>
+<div class="message-box">
+  <h2>✅ Item Added to Cart</h2>
+  <p>Your product has been successfully added to your shopping cart.</p>
+  <div>
+    <a href="/cart" class="btn-cart">🛒 View Cart</a>
+    <a href="/products" class="btn-continue">⬅ Continue Shopping</a>
+  </div>
+</div>
+</body>
+</html>

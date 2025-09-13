@@ -31,12 +31,24 @@ public class CartController {
         return "cart"; // cart.html
     }
 
-    // Add product to cart
+    // Show Add-to-Cart form for a product
     @GetMapping("/add/{productId}")
-    public String addToCart(@PathVariable Long productId) {
+    public String showAddToCartForm(@PathVariable Long productId, Model model) {
+        Product product = productService.getProductById(productId);
+        if (product == null) {
+            return "redirect:/products"; // fallback if product not found
+        }
+        model.addAttribute("product", product);
+        return "addtocart"; // ✅ matches addtocart.html
+    }
+
+    // Handle Add-to-Cart form submission
+    @PostMapping("/add")
+    public String addToCart(@RequestParam Long productId,
+                            @RequestParam int quantity) {
         Product product = productService.getProductById(productId);
         if (product != null) {
-            cartService.addToCart(product, 1);
+            cartService.addToCart(product, quantity);
         }
         return "redirect:/cart";
     }
@@ -63,4 +75,3 @@ public class CartController {
         return "redirect:/cart";
     }
 }
-
